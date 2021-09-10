@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace IES.FixedAssets.Database.Models
 {
-	public class ReceiptModel
+	public sealed class ReceiptModel
 	{
 		public Guid Id { get; set; }
 

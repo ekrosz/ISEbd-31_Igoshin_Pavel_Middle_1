@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IES.FixedAssets.Database.Models
 {
-	public class ProviderModel
+	public sealed class ProviderModel
 	{
 		public Guid Id { get; set; }
 

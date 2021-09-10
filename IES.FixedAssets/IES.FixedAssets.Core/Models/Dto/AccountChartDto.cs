@@ -1,10 +1,9 @@
 ﻿using IES.FixedAssets.Common.Enums;
 using System;
-using System.Collections.Generic;
 
-namespace IES.FixedAssets.Database.Models
+namespace IES.FixedAssets.Core.Models.Dto
 {
-	public sealed class DebitAccountChartModel
+	public sealed class AccountChartDto
 	{
 		public Guid Id { get; set; }
 
@@ -21,7 +20,5 @@ namespace IES.FixedAssets.Database.Models
 		public string ThirdSubconto { get; set; }
 
 		public string Comment { get; set; }
-
-		public List<EntryJournalModel> DebitEntryJournals { get; set; } = new List<EntryJournalModel>();
 	}
 }

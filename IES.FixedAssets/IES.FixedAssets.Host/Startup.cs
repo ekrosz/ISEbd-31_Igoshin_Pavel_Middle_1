@@ -1,6 +1,9 @@
-﻿using IES.FixedAssets.Core.Services;
+﻿using AutoMapper;
+using IES.FixedAssets.Core.Models.Dto;
+using IES.FixedAssets.Core.Services;
 using IES.FixedAssets.Core.Services.Contracts;
 using IES.FixedAssets.Database;
+using IES.FixedAssets.Database.Models;
 using IES.FixedAssets.Database.Repositories;
 using IES.FixedAssets.Database.Repositories.Contracts;
 using Unity;
@@ -17,6 +20,7 @@ namespace IES.FixedAssets.Host
 			AddDatabase(container);
 			AddRepositories(container);
 			AddServices(container);
+			AddMappings(container);
 
 			return container;
 		}
@@ -46,6 +50,25 @@ namespace IES.FixedAssets.Host
 			container.RegisterType<IProviderService, ProviderService>(new HierarchicalLifetimeManager());
 			container.RegisterType<IReceiptService, ReceiptService>(new HierarchicalLifetimeManager());
 			container.RegisterType<IReceiptTableService, ReceiptTableService>(new HierarchicalLifetimeManager());
+		}
+
+		private static void AddMappings(IUnityContainer container)
+		{
+			//TODO: Requests mapping
+			var config = new MapperConfiguration(cfg => 
+			{
+				cfg.CreateMap<CreditAccountChartModel, AccountChartDto>();
+				cfg.CreateMap<DebitAccountChartModel, AccountChartDto>();
+				cfg.CreateMap<EntryJournalModel, EntryJournalDto>();
+				cfg.CreateMap<FixedAssetModel, FixedAssetDto>();
+				cfg.CreateMap<ProviderModel, ProviderDto>();
+				cfg.CreateMap<ReceiptModel, ReceiptDto>();
+				cfg.CreateMap<ReceiptTableModel, ReceiptTableDto>();
+			});
+
+			var mapper = config.CreateMapper();
+
+			container.RegisterInstance<IMapper>(mapper);
 		}
 	}
 }

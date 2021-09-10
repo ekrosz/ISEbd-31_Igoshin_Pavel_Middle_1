@@ -12,9 +12,16 @@
   <ItemGroup>
     <Folder Include="Helpers\Extensions\" />
     <Folder Include="Helpers\Validators\" />
-    <Folder Include="Models\Requests\" />
-    <Folder Include="Models\Dto\" />
     <Folder Include="Mappings\" />
+    <Folder Include="Models\Requests\EntryJournalRequests\" />
+    <Folder Include="Models\Requests\FixedAssetRequest\" />
+    <Folder Include="Models\Requests\ProviderRequests\" />
+    <Folder Include="Models\Requests\ReceiptRequests\" />
+    <Folder Include="Models\Requests\ReceiptTableRequests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace IES.FixedAssets.Database.Models
 {
-	public class CreditAccountChartModel
+	public sealed class CreditAccountChartModel
 	{
 		public Guid Id { get; set; }
 
