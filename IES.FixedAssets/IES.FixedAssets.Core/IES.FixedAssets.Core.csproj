@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IES.FixedAssets.Common\IES.FixedAssets.Common.csproj" />
+    <ProjectReference Include="..\IES.FixedAssets.Database\IES.FixedAssets.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\Extensions\" />
+    <Folder Include="Helpers\Validators\" />
+    <Folder Include="Models\Requests\" />
+    <Folder Include="Models\Dto\" />
+    <Folder Include="Services\Contracts\" />
+    <Folder Include="Mappings\" />
+  </ItemGroup>
+
+</Project>
