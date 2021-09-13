@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IES.FixedAssets.Core.Services;
+using IES.FixedAssets.Core.Services.Contracts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,16 +11,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
-namespace IES.FixedAssets.Host
+namespace IES.FixedAssets.Host.Forms
 {
 	public partial class MainForm : Form
 	{
 		[Dependency]
 		public new IUnityContainer Container { get; set; }
 
-		public MainForm()
+		private readonly IAccountChartService _accountChartService;
+
+		public MainForm(IAccountChartService accountChartService)
 		{
 			InitializeComponent();
+
+			_accountChartService = accountChartService;
 		}
 	}
 }

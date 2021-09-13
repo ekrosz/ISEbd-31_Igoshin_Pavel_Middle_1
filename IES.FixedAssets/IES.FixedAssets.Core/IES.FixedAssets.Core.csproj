@@ -13,11 +13,6 @@
     <Folder Include="Helpers\Extensions\" />
     <Folder Include="Helpers\Validators\" />
     <Folder Include="Mappings\" />
-    <Folder Include="Models\Requests\EntryJournalRequests\" />
-    <Folder Include="Models\Requests\FixedAssetRequest\" />
-    <Folder Include="Models\Requests\ProviderRequests\" />
-    <Folder Include="Models\Requests\ReceiptRequests\" />
-    <Folder Include="Models\Requests\ReceiptTableRequests\" />
   </ItemGroup>
 
   <ItemGroup>

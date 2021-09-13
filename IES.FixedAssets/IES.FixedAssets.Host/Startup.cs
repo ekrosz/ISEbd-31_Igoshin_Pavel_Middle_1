@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
 using IES.FixedAssets.Core.Models.Dto;
+using IES.FixedAssets.Core.Models.Requests.EntryJournalRequests;
+using IES.FixedAssets.Core.Models.Requests.FixedAssetRequest;
+using IES.FixedAssets.Core.Models.Requests.ProviderRequests;
+using IES.FixedAssets.Core.Models.Requests.ReceiptRequests;
+using IES.FixedAssets.Core.Models.Requests.ReceiptTableRequests;
 using IES.FixedAssets.Core.Services;
 using IES.FixedAssets.Core.Services.Contracts;
 using IES.FixedAssets.Database;
@@ -54,7 +59,6 @@ namespace IES.FixedAssets.Host
 
 		private static void AddMappings(IUnityContainer container)
 		{
-			//TODO: Requests mapping
 			var config = new MapperConfiguration(cfg => 
 			{
 				cfg.CreateMap<CreditAccountChartModel, AccountChartDto>();
@@ -64,6 +68,18 @@ namespace IES.FixedAssets.Host
 				cfg.CreateMap<ProviderModel, ProviderDto>();
 				cfg.CreateMap<ReceiptModel, ReceiptDto>();
 				cfg.CreateMap<ReceiptTableModel, ReceiptTableDto>();
+
+				cfg.CreateMap<CreateEntryJournalRequest, EntryJournalModel>();
+				cfg.CreateMap<CreateFixedAssetRequest, FixedAssetModel>();
+				cfg.CreateMap<CreateProviderRequest, ProviderModel>();
+				cfg.CreateMap<CreateReceiptRequest, ReceiptModel>();
+				cfg.CreateMap<CreateReceiptTableRequest, ReceiptTableModel>();
+
+				cfg.CreateMap<UpdateEntryJournalRequest, EntryJournalModel>();
+				cfg.CreateMap<UpdateFixedAssetRequest, FixedAssetModel>();
+				cfg.CreateMap<UpdateProviderRequest, ProviderModel>();
+				cfg.CreateMap<UpdateReceiptRequest, ReceiptModel>();
+				cfg.CreateMap<UpdateReceiptTableRequest, ReceiptTableModel>();
 			});
 
 			var mapper = config.CreateMapper();
