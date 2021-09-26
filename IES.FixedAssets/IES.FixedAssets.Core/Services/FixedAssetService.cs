@@ -67,7 +67,7 @@ namespace IES.FixedAssets.Core.Services
 		{
 			var entity = await _fixedAssetRepository.GetFixedAssetOrThrow(args.Id);
 
-			await _fixedAssetRepository.IsUniqueNameOrThrow(args.Name);
+			await _fixedAssetRepository.IsUniqueNameOrThrow(args.Id, args.Name);
 
 			args.Validate();
 

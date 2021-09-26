@@ -1,6 +1,10 @@
-﻿using IES.FixedAssets.Core.Models.Dto;
+﻿using AutoMapper;
+using IES.FixedAssets.Core.Models.Dto;
 using IES.FixedAssets.Core.Models.Requests.ProviderRequests;
 using IES.FixedAssets.Core.Services.Contracts;
+using IES.FixedAssets.Database.Extensions.RepositoryExtensions;
+using IES.FixedAssets.Database.Models;
+using IES.FixedAssets.Database.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,29 +13,62 @@ namespace IES.FixedAssets.Core.Services
 {
 	public class ProviderService : IProviderService
 	{
-		public Task Create(CreateProviderRequest args)
+		private readonly IProviderRepository _providerRepository;
+
+		private readonly IMapper _mapper;
+
+		public ProviderService(IProviderRepository providerRepository, IMapper mapper)
 		{
-			throw new NotImplementedException();
+			_providerRepository = providerRepository;
+			_mapper = mapper;
 		}
 
-		public Task Delete(Guid id)
+		public async Task Create(CreateProviderRequest args)
 		{
-			throw new NotImplementedException();
+			await _providerRepository.IsUniqueNameOrThrow(args.Name);
+
+			var entity = _mapper.Map<ProviderModel>(args);
+
+			await _providerRepository.Create(entity);
 		}
 
-		public Task<ProviderDto> Get(Guid id)
+		public async Task Delete(Guid id)
 		{
-			throw new NotImplementedException();
+			var entity = await _providerRepository.GetProviderOrThrow(id);
+
+			await _providerRepository.Delete(entity);
 		}
 
-		public Task<IReadOnlyCollection<ProviderDto>> GetAll()
+		public async Task<ProviderDto> Get(Guid id)
 		{
-			throw new NotImplementedException();
+			var entity = await _providerRepository.GetProviderOrThrow(id);
+
+			var dto = _mapper.Map<ProviderDto>(entity);
+
+			return dto;
 		}
 
-		public Task Update(UpdateProviderRequest args)
+		public async Task<IReadOnlyCollection<ProviderDto>> GetAll()
 		{
-			throw new NotImplementedException();
+			var entities = await _providerRepository.GetAll();
+
+			if (entities == null)
+				return new List<ProviderDto>();
+
+			var dtos = _mapper.Map<IReadOnlyCollection<ProviderDto>>(entities);
+
+			return dtos;
+		}
+
+		public async Task Update(UpdateProviderRequest args)
+		{
+			var entity = await _providerRepository.GetProviderOrThrow(args.Id);
+
+			await _providerRepository.IsUniqueNameOrThrow(args.Id, args.Name);
+
+			_mapper.Map(args, entity);
+
+			await _providerRepository.Update(entity);
 		}
 	}
 }
