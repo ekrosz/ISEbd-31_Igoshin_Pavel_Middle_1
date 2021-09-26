@@ -26,9 +26,9 @@ namespace IES.FixedAssets.Core.Services
 
 		public async Task Create(CreateFixedAssetRequest args)
 		{
-			args.Validate();
-
 			await _fixedAssetRepository.IsUniqueNameOrThrow(args.Name);
+
+			args.Validate();
 
 			var entity = _mapper.Map<FixedAssetModel>(args);
 
@@ -66,6 +66,8 @@ namespace IES.FixedAssets.Core.Services
 		public async Task Update(UpdateFixedAssetRequest args)
 		{
 			var entity = await _fixedAssetRepository.GetFixedAssetOrThrow(args.Id);
+
+			await _fixedAssetRepository.IsUniqueNameOrThrow(args.Name);
 
 			args.Validate();
 

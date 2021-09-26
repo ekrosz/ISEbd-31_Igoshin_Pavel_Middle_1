@@ -24,8 +24,6 @@ namespace IES.FixedAssets.Host.Forms
 			InitializeComponent();
 
 			_accountChartService = accountChartService;
-
-			LoadData();
 		}
 
 		private async void LoadData()
@@ -38,6 +36,11 @@ namespace IES.FixedAssets.Host.Forms
 				dataGridViewAccountCharts.Columns[0].Visible = false;
 				dataGridViewAccountCharts.AutoResizeColumns();
 			}
+		}
+
+		private void AccountChartForm_Load(object sender, EventArgs e)
+		{
+			LoadData();
 		}
 	}
 }

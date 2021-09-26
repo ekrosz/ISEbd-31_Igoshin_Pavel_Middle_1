@@ -186,11 +186,17 @@
     <Compile Include="Forms\AccountChartForm.Designer.cs">
       <DependentUpon>AccountChartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FixedAssetForm.cs">
+    <Compile Include="Forms\FixedAssetsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FixedAssetForm.Designer.cs">
-      <DependentUpon>FixedAssetForm.cs</DependentUpon>
+    <Compile Include="Forms\FixedAssetsForm.Designer.cs">
+      <DependentUpon>FixedAssetsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FixedAssetUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FixedAssetUpdateForm.Designer.cs">
+      <DependentUpon>FixedAssetUpdateForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -204,8 +210,11 @@
     <EmbeddedResource Include="Forms\AccountChartForm.resx">
       <DependentUpon>AccountChartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FixedAssetForm.resx">
-      <DependentUpon>FixedAssetForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FixedAssetsForm.resx">
+      <DependentUpon>FixedAssetsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FixedAssetUpdateForm.resx">
+      <DependentUpon>FixedAssetUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

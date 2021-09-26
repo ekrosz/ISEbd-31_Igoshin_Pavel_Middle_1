@@ -36,7 +36,7 @@ namespace IES.FixedAssets.Host.Forms
 
 		private void оСToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var form = Container.Resolve<FixedAssetForm>();
+			var form = Container.Resolve<FixedAssetsForm>();
 
 			form.ShowDialog();
 		}

@@ -53,7 +53,8 @@ namespace IES.FixedAssets.Host.Forms
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.dataGridViewAccountCharts);
 			this.Name = "AccountChartForm";
-			this.Text = "AccountChartForm";
+			this.Text = "Бухгалтерские счета";
+			this.Load += new System.EventHandler(this.AccountChartForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewAccountCharts)).EndInit();
 			this.ResumeLayout(false);
 

@@ -1,7 +1,7 @@
 ﻿
 namespace IES.FixedAssets.Host.Forms
 {
-	partial class FixedAssetForm
+	partial class FixedAssetsForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -31,7 +31,10 @@ namespace IES.FixedAssets.Host.Forms
 		{
 			this.dataGridViewFixedAssets = new System.Windows.Forms.DataGridView();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.buttonSave = new System.Windows.Forms.Button();
+			this.buttonClose = new System.Windows.Forms.Button();
+			this.buttonDelete = new System.Windows.Forms.Button();
+			this.buttonUpdate = new System.Windows.Forms.Button();
+			this.buttonAdd = new System.Windows.Forms.Button();
 			this.labelBalance = new System.Windows.Forms.Label();
 			this.labelName = new System.Windows.Forms.Label();
 			this.textBoxBalance = new System.Windows.Forms.TextBox();
@@ -56,7 +59,10 @@ namespace IES.FixedAssets.Host.Forms
 			// 
 			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.groupBox1.Controls.Add(this.buttonSave);
+			this.groupBox1.Controls.Add(this.buttonClose);
+			this.groupBox1.Controls.Add(this.buttonDelete);
+			this.groupBox1.Controls.Add(this.buttonUpdate);
+			this.groupBox1.Controls.Add(this.buttonAdd);
 			this.groupBox1.Controls.Add(this.labelBalance);
 			this.groupBox1.Controls.Add(this.labelName);
 			this.groupBox1.Controls.Add(this.textBoxBalance);
@@ -68,15 +74,45 @@ namespace IES.FixedAssets.Host.Forms
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Добавление / редактирование";
 			// 
-			// buttonSave
+			// buttonClose
 			// 
-			this.buttonSave.Location = new System.Drawing.Point(172, 625);
-			this.buttonSave.Name = "buttonSave";
-			this.buttonSave.Size = new System.Drawing.Size(143, 43);
-			this.buttonSave.TabIndex = 4;
-			this.buttonSave.Text = "Сохранить";
-			this.buttonSave.UseVisualStyleBackColor = true;
-			this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+			this.buttonClose.Location = new System.Drawing.Point(166, 623);
+			this.buttonClose.Name = "buttonClose";
+			this.buttonClose.Size = new System.Drawing.Size(143, 39);
+			this.buttonClose.TabIndex = 7;
+			this.buttonClose.Text = "Закрыть";
+			this.buttonClose.UseVisualStyleBackColor = true;
+			this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+			// 
+			// buttonDelete
+			// 
+			this.buttonDelete.Location = new System.Drawing.Point(6, 353);
+			this.buttonDelete.Name = "buttonDelete";
+			this.buttonDelete.Size = new System.Drawing.Size(303, 35);
+			this.buttonDelete.TabIndex = 6;
+			this.buttonDelete.Text = "Удалить";
+			this.buttonDelete.UseVisualStyleBackColor = true;
+			this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+			// 
+			// buttonUpdate
+			// 
+			this.buttonUpdate.Location = new System.Drawing.Point(6, 311);
+			this.buttonUpdate.Name = "buttonUpdate";
+			this.buttonUpdate.Size = new System.Drawing.Size(303, 35);
+			this.buttonUpdate.TabIndex = 5;
+			this.buttonUpdate.Text = "Изменить";
+			this.buttonUpdate.UseVisualStyleBackColor = true;
+			this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+			// 
+			// buttonAdd
+			// 
+			this.buttonAdd.Location = new System.Drawing.Point(166, 180);
+			this.buttonAdd.Name = "buttonAdd";
+			this.buttonAdd.Size = new System.Drawing.Size(143, 43);
+			this.buttonAdd.TabIndex = 4;
+			this.buttonAdd.Text = "Добавить";
+			this.buttonAdd.UseVisualStyleBackColor = true;
+			this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
 			// 
 			// labelBalance
 			// 
@@ -111,7 +147,7 @@ namespace IES.FixedAssets.Host.Forms
 			this.textBoxName.Size = new System.Drawing.Size(303, 26);
 			this.textBoxName.TabIndex = 0;
 			// 
-			// FixedAssetForm
+			// FixedAssetsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -119,8 +155,9 @@ namespace IES.FixedAssets.Host.Forms
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.dataGridViewFixedAssets);
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.Name = "FixedAssetForm";
-			this.Text = "FixedAssetForm";
+			this.Name = "FixedAssetsForm";
+			this.Text = "Основные средства";
+			this.Load += new System.EventHandler(this.FixedAssetsForm_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewFixedAssets)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
@@ -132,10 +169,13 @@ namespace IES.FixedAssets.Host.Forms
 
 		private System.Windows.Forms.DataGridView dataGridViewFixedAssets;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.Button buttonSave;
+		private System.Windows.Forms.Button buttonAdd;
 		private System.Windows.Forms.Label labelBalance;
 		private System.Windows.Forms.Label labelName;
 		private System.Windows.Forms.TextBox textBoxBalance;
 		private System.Windows.Forms.TextBox textBoxName;
+		private System.Windows.Forms.Button buttonClose;
+		private System.Windows.Forms.Button buttonDelete;
+		private System.Windows.Forms.Button buttonUpdate;
 	}
 }
