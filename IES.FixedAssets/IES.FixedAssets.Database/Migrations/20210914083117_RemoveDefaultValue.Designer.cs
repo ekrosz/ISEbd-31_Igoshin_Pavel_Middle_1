@@ -4,14 +4,16 @@ using IES.FixedAssets.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IES.FixedAssets.Database.Migrations
 {
     [DbContext(typeof(FixedAssetsContext))]
-    partial class FixedAssetsContextModelSnapshot : ModelSnapshot
+    [Migration("20210914083117_RemoveDefaultValue")]
+    partial class RemoveDefaultValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,24 +39,24 @@ namespace IES.FixedAssets.Database.Migrations
 
                     b.Property<string>("AccountType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
                     b.Property<string>("FirstSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("SecondSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("ThirdSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
@@ -85,24 +87,24 @@ namespace IES.FixedAssets.Database.Migrations
 
                     b.Property<string>("AccountType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
                     b.Property<string>("FirstSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("SecondSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("ThirdSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
@@ -127,35 +129,11 @@ namespace IES.FixedAssets.Database.Migrations
                     b.Property<Guid>("CreditAccountId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CreditFirstSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
-
-                    b.Property<string>("CreditSecondSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
-
-                    b.Property<string>("CreditThirdSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
-
                     b.Property<DateTime>("DateEntry")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("DebitAccountId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("DebitFirstSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
-
-                    b.Property<string>("DebitSecondSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
-
-                    b.Property<string>("DebitThirdSubconto")
-                        .HasColumnType("nvarchar(80)")
-                        .HasMaxLength(80);
 
                     b.Property<Guid>("ReceiptTableId")
                         .HasColumnType("uniqueidentifier");

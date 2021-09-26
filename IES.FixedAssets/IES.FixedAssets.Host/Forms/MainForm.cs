@@ -26,5 +26,19 @@ namespace IES.FixedAssets.Host.Forms
 
 			_accountChartService = accountChartService;
 		}
+
+		private void планСчетовToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<AccountChartForm>();
+
+			form.ShowDialog();
+		}
+
+		private void оСToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<FixedAssetForm>();
+
+			form.ShowDialog();
+		}
 	}
 }

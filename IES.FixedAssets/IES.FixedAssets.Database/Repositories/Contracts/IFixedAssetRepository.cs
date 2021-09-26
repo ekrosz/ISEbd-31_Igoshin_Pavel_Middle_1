@@ -9,12 +9,14 @@ namespace IES.FixedAssets.Database.Repositories.Contracts
 	{
 		Task<IReadOnlyCollection<FixedAssetModel>> GetAll();
 
-		Task<FixedAssetModel> Get(Guid id);
+		Task<FixedAssetModel> GetById(Guid id);
+
+		Task<FixedAssetModel> GetByName(string name);
 
 		Task Create(FixedAssetModel entity);
 
-		void Update(FixedAssetModel entity);
+		Task Update(FixedAssetModel entity);
 
-		void Delete(FixedAssetModel entity);
+		Task Delete(FixedAssetModel entity);
 	}
 }

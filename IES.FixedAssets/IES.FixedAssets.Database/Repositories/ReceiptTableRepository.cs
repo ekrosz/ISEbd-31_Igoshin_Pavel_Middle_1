@@ -19,11 +19,15 @@ namespace IES.FixedAssets.Database.Repositories
 		public async Task Create(ReceiptTableModel entity)
 		{
 			await _context.ReceiptTables.AddAsync(entity);
+
+			await _context.SaveChangesAsync();
 		}
 
-		public void Delete(ReceiptTableModel entity)
+		public async Task Delete(ReceiptTableModel entity)
 		{
 			_context.ReceiptTables.Remove(entity);
+
+			await _context.SaveChangesAsync();
 		}
 
 		public async Task<ReceiptTableModel> Get(Guid id)
@@ -39,9 +43,11 @@ namespace IES.FixedAssets.Database.Repositories
 				.ToArrayAsync();
 		}
 
-		public void Update(ReceiptTableModel entity)
+		public async Task Update(ReceiptTableModel entity)
 		{
 			_context.ReceiptTables.Update(entity);
+
+			await _context.SaveChangesAsync();
 		}
 	}
 }

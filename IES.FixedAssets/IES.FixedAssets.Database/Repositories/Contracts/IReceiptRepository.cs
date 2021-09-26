@@ -13,8 +13,8 @@ namespace IES.FixedAssets.Database.Repositories.Contracts
 
 		Task Create(ReceiptModel entity);
 
-		void Update(ReceiptModel entity);
+		Task Update(ReceiptModel entity);
 
-		void Delete(ReceiptModel entity);
+		Task Delete(ReceiptModel entity);
 	}
 }

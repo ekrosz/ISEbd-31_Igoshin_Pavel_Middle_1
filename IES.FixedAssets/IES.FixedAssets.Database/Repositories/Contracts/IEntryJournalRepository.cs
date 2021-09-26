@@ -13,8 +13,8 @@ namespace IES.FixedAssets.Database.Repositories.Contracts
 
 		Task Create(EntryJournalModel entity);
 
-		void Update(EntryJournalModel entity);
+		Task Update(EntryJournalModel entity);
 
-		void Delete(EntryJournalModel entity);
+		Task Delete(EntryJournalModel entity);
 	}
 }

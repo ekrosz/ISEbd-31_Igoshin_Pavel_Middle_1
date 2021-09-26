@@ -3,6 +3,7 @@ using IES.FixedAssets.Database.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IES.FixedAssets.Database.Repositories
@@ -19,11 +20,15 @@ namespace IES.FixedAssets.Database.Repositories
 		public async Task Create(EntryJournalModel entity)
 		{
 			await _context.EntryJournals.AddAsync(entity);
+
+			await _context.SaveChangesAsync();
 		}
 
-		public void Delete(EntryJournalModel entity)
+		public async Task Delete(EntryJournalModel entity)
 		{
 			_context.EntryJournals.Remove(entity);
+
+			await _context.SaveChangesAsync();
 		}
 
 		public async Task<EntryJournalModel> Get(Guid id)
@@ -36,12 +41,15 @@ namespace IES.FixedAssets.Database.Repositories
 		{
 			return await _context.EntryJournals
 				.AsNoTracking()
+				.OrderBy(p => p.DateEntry)
 				.ToArrayAsync();
 		}
 
-		public void Update(EntryJournalModel entity)
+		public async Task Update(EntryJournalModel entity)
 		{
 			_context.EntryJournals.Update(entity);
+
+			await _context.SaveChangesAsync();
 		}
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using IES.FixedAssets.Database.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace IES.FixedAssets.Database
 {
@@ -45,7 +44,7 @@ namespace IES.FixedAssets.Database
 
 				e.Property(p => p.AccountNumber)
 				.IsRequired()
-				.HasMaxLength(4);
+				.HasMaxLength(10);
 
 				e.HasIndex(p => p.AccountName)
 				.IsUnique();
@@ -56,17 +55,16 @@ namespace IES.FixedAssets.Database
 
 				e.Property(p => p.AccountType)
 				.IsRequired()
-				.HasConversion<string>()
-				.HasMaxLength(100);
+				.HasMaxLength(50);
 
 				e.Property(p => p.FirstSubconto)
-				.HasMaxLength(4);
+				.HasMaxLength(80);
 
 				e.Property(p => p.SecondSubconto)
-				.HasMaxLength(4);
+				.HasMaxLength(80);
 
 				e.Property(p => p.ThirdSubconto)
-				.HasMaxLength(4);
+				.HasMaxLength(80);
 
 				e.Property(p => p.Comment)
 				.HasMaxLength(255);
@@ -86,7 +84,7 @@ namespace IES.FixedAssets.Database
 
 				e.Property(p => p.AccountNumber)
 				.IsRequired()
-				.HasMaxLength(4);
+				.HasMaxLength(10);
 
 				e.HasIndex(p => p.AccountName)
 				.IsUnique();
@@ -97,17 +95,16 @@ namespace IES.FixedAssets.Database
 
 				e.Property(p => p.AccountType)
 				.IsRequired()
-				.HasConversion<string>()
-				.HasMaxLength(100);
+				.HasMaxLength(50);
 
 				e.Property(p => p.FirstSubconto)
-				.HasMaxLength(4);
+				.HasMaxLength(80);
 
 				e.Property(p => p.SecondSubconto)
-				.HasMaxLength(4);
+				.HasMaxLength(80);
 
 				e.Property(p => p.ThirdSubconto)
-				.HasMaxLength(4);
+				.HasMaxLength(80);
 
 				e.Property(p => p.Comment)
 				.HasMaxLength(255);
@@ -128,6 +125,24 @@ namespace IES.FixedAssets.Database
 
 				e.HasIndex(p => p.ReceiptTableId);
 
+				e.Property(p => p.CreditFirstSubconto)
+				.HasMaxLength(80);
+
+				e.Property(p => p.CreditSecondSubconto)
+				.HasMaxLength(80);
+
+				e.Property(p => p.CreditThirdSubconto)
+				.HasMaxLength(80);
+
+				e.Property(p => p.DebitFirstSubconto)
+				.HasMaxLength(80);
+
+				e.Property(p => p.DebitSecondSubconto)
+				.HasMaxLength(80);
+
+				e.Property(p => p.DebitThirdSubconto)
+				.HasMaxLength(80);
+
 				e.Property(p => p.Count)
 				.IsRequired();
 
@@ -135,7 +150,7 @@ namespace IES.FixedAssets.Database
 				.IsRequired();
 
 				e.Property(p => p.DateEntry)
-				.HasDefaultValue(DateTime.Now);
+				.IsRequired();
 			});
 
 			builder.Entity<FixedAssetModel>(e =>
@@ -185,7 +200,7 @@ namespace IES.FixedAssets.Database
 				.IsRequired();
 
 				e.Property(p => p.ReceiptDate)
-				.HasDefaultValue(DateTime.Now);
+				.IsRequired();
 
 				e.Property(p => p.OperationType)
 				.HasConversion<string>()

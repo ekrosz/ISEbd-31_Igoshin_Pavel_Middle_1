@@ -1,5 +1,4 @@
-﻿using IES.FixedAssets.Common.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace IES.FixedAssets.Database.Models
@@ -12,7 +11,7 @@ namespace IES.FixedAssets.Database.Models
 
 		public string AccountName { get; set; }
 
-		public AccountType AccountType { get; set; }
+		public string AccountType { get; set; }
 
 		public string FirstSubconto { get; set; }
 

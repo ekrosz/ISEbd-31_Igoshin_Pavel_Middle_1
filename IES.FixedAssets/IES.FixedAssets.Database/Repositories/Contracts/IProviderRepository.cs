@@ -13,8 +13,8 @@ namespace IES.FixedAssets.Database.Repositories.Contracts
 
 		Task Create(ProviderModel entity);
 
-		void Update(ProviderModel entity);
+		Task Update(ProviderModel entity);
 
-		void Delete(ProviderModel entity);
+		Task Delete(ProviderModel entity);
 	}
 }

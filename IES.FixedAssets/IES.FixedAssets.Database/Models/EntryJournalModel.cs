@@ -13,6 +13,18 @@ namespace IES.FixedAssets.Database.Models
 
 		public Guid ReceiptTableId { get; set; }
 
+		public string DebitFirstSubconto { get; set; }
+
+		public string DebitSecondSubconto { get; set; }
+
+		public string DebitThirdSubconto { get; set; }
+
+		public string CreditFirstSubconto { get; set; }
+
+		public string CreditSecondSubconto { get; set; }
+
+		public string CreditThirdSubconto { get; set; }
+
 		public int Count { get; set; }
 
 		public double Sum { get; set; }

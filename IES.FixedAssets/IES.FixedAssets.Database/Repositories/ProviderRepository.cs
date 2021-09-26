@@ -19,11 +19,15 @@ namespace IES.FixedAssets.Database.Repositories
 		public async Task Create(ProviderModel entity)
 		{
 			await _context.Providers.AddAsync(entity);
+
+			await _context.SaveChangesAsync();
 		}
 
-		public void Delete(ProviderModel entity)
+		public async Task Delete(ProviderModel entity)
 		{
 			_context.Providers.Remove(entity);
+
+			await _context.SaveChangesAsync();
 		}
 
 		public async Task<ProviderModel> Get(Guid id)
@@ -39,9 +43,11 @@ namespace IES.FixedAssets.Database.Repositories
 				.ToArrayAsync();
 		}
 
-		public void Update(ProviderModel entity)
+		public async Task Update(ProviderModel entity)
 		{
 			_context.Providers.Update(entity);
+
+			await _context.SaveChangesAsync();
 		}
 	}
 }

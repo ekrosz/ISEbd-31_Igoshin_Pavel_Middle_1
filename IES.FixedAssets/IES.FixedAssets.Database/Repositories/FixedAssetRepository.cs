@@ -19,14 +19,18 @@ namespace IES.FixedAssets.Database.Repositories
 		public async Task Create(FixedAssetModel entity)
 		{
 			await _context.FixedAssets.AddAsync(entity);
+
+			await _context.SaveChangesAsync();
 		}
 
-		public void Delete(FixedAssetModel entity)
+		public async Task Delete(FixedAssetModel entity)
 		{
 			_context.FixedAssets.Remove(entity);
+
+			await _context.SaveChangesAsync();
 		}
 
-		public async Task<FixedAssetModel> Get(Guid id)
+		public async Task<FixedAssetModel> GetById(Guid id)
 		{
 			return await _context.FixedAssets
 				.SingleOrDefaultAsync(e => e.Id == id);
@@ -39,9 +43,18 @@ namespace IES.FixedAssets.Database.Repositories
 				.ToArrayAsync();
 		}
 
-		public void Update(FixedAssetModel entity)
+		public async Task Update(FixedAssetModel entity)
 		{
 			_context.FixedAssets.Update(entity);
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task<FixedAssetModel> GetByName(string name)
+		{
+			return await _context.FixedAssets
+				.AsNoTracking()
+				.FirstOrDefaultAsync(p => EF.Functions.Like(p.Name, name));
 		}
 	}
 }

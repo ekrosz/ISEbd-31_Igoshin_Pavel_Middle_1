@@ -1,6 +1,11 @@
-﻿using IES.FixedAssets.Core.Models.Dto;
+﻿using AutoMapper;
+using IES.FixedAssets.Core.Helpers.Validators;
+using IES.FixedAssets.Core.Models.Dto;
 using IES.FixedAssets.Core.Models.Requests.FixedAssetRequest;
 using IES.FixedAssets.Core.Services.Contracts;
+using IES.FixedAssets.Database.Extensions.RepositoryExtensions;
+using IES.FixedAssets.Database.Models;
+using IES.FixedAssets.Database.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,29 +14,64 @@ namespace IES.FixedAssets.Core.Services
 {
 	public class FixedAssetService : IFixedAssetService
 	{
-		public Task Create(CreateFixedAssetRequest args)
+		private readonly IFixedAssetRepository _fixedAssetRepository;
+
+		private readonly IMapper _mapper;
+
+		public FixedAssetService(IFixedAssetRepository fixedAssetRepository, IMapper mapper)
 		{
-			throw new NotImplementedException();
+			_fixedAssetRepository = fixedAssetRepository;
+			_mapper = mapper;
 		}
 
-		public Task Delete(Guid id)
+		public async Task Create(CreateFixedAssetRequest args)
 		{
-			throw new NotImplementedException();
+			args.Validate();
+
+			await _fixedAssetRepository.IsUniqueNameOrThrow(args.Name);
+
+			var entity = _mapper.Map<FixedAssetModel>(args);
+
+			await _fixedAssetRepository.Create(entity);
 		}
 
-		public Task<FixedAssetDto> Get(Guid id)
+		public async Task Delete(Guid id)
 		{
-			throw new NotImplementedException();
+			var entity = await _fixedAssetRepository.GetFixedAssetOrThrow(id);
+
+			await _fixedAssetRepository.Delete(entity);
 		}
 
-		public Task<IReadOnlyCollection<FixedAssetDto>> GetAll()
+		public async Task<FixedAssetDto> Get(Guid id)
 		{
-			throw new NotImplementedException();
+			var entity = await _fixedAssetRepository.GetFixedAssetOrThrow(id);
+
+			var dto = _mapper.Map<FixedAssetDto>(entity);
+
+			return dto;
 		}
 
-		public Task Update(UpdateFixedAssetRequest args)
+		public async Task<IReadOnlyCollection<FixedAssetDto>> GetAll()
 		{
-			throw new NotImplementedException();
+			var entities = await _fixedAssetRepository.GetAll();
+
+			if (entities == null)
+				return new List<FixedAssetDto>();
+
+			var dtos = _mapper.Map<IReadOnlyCollection<FixedAssetDto>>(entities);
+
+			return dtos;
+		}
+
+		public async Task Update(UpdateFixedAssetRequest args)
+		{
+			var entity = await _fixedAssetRepository.GetFixedAssetOrThrow(args.Id);
+
+			args.Validate();
+
+			_mapper.Map(args, entity);
+
+			await _fixedAssetRepository.Update(entity);
 		}
 	}
 }

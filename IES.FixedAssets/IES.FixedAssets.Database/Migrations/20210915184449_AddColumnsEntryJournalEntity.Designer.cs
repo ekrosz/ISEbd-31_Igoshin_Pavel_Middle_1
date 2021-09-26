@@ -4,14 +4,16 @@ using IES.FixedAssets.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IES.FixedAssets.Database.Migrations
 {
     [DbContext(typeof(FixedAssetsContext))]
-    partial class FixedAssetsContextModelSnapshot : ModelSnapshot
+    [Migration("20210915184449_AddColumnsEntryJournalEntity")]
+    partial class AddColumnsEntryJournalEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

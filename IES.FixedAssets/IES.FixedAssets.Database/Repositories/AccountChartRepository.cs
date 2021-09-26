@@ -2,6 +2,7 @@
 using IES.FixedAssets.Database.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IES.FixedAssets.Database.Repositories
@@ -17,6 +18,7 @@ namespace IES.FixedAssets.Database.Repositories
 		{
 			return await _context.CreditAccountCharts
 				.AsNoTracking()
+				.OrderBy(p => p.AccountNumber)
 				.ToArrayAsync();
 		}
 
@@ -24,6 +26,7 @@ namespace IES.FixedAssets.Database.Repositories
 		{
 			return await _context.DebitAccountCharts
 				.AsNoTracking()
+				.OrderBy(p => p.AccountNumber)
 				.ToArrayAsync();
 		}
 	}
