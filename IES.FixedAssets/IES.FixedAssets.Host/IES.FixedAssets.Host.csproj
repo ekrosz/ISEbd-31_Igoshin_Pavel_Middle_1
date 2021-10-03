@@ -204,6 +204,24 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProvidersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProvidersForm.Designer.cs">
+      <DependentUpon>ProvidersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProviderUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProviderUpdateForm.Designer.cs">
+      <DependentUpon>ProviderUpdateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReceiptsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReceiptsForm.Designer.cs">
+      <DependentUpon>ReceiptsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -218,6 +236,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProvidersForm.resx">
+      <DependentUpon>ProvidersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProviderUpdateForm.resx">
+      <DependentUpon>ProviderUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReceiptsForm.resx">
+      <DependentUpon>ReceiptsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

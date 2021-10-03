@@ -1,6 +1,7 @@
 ﻿using IES.FixedAssets.Core.Models.Requests.FixedAssetRequest;
 using IES.FixedAssets.Core.Services.Contracts;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -20,7 +21,7 @@ namespace IES.FixedAssets.Host.Forms
 			_fixedAssetService = fixedAssetService;
 		}
 
-		private async void LoadData()
+		private async Task LoadData()
 		{
 			var data = await _fixedAssetService.GetAll();
 
@@ -56,7 +57,10 @@ namespace IES.FixedAssets.Host.Forms
 					BalancePrice = textBoxBalance.Text
 				});
 
-				LoadData();
+				textBoxName.Text = string.Empty;
+				textBoxBalance.Text = string.Empty;
+
+				await LoadData();
 			}
 			catch (Exception exc)
 			{
@@ -64,7 +68,7 @@ namespace IES.FixedAssets.Host.Forms
 			}
 		}
 
-		private void buttonUpdate_Click(object sender, EventArgs e)
+		private async void buttonUpdate_Click(object sender, EventArgs e)
 		{
 			try
 			{
@@ -78,7 +82,7 @@ namespace IES.FixedAssets.Host.Forms
 
 					if (form.ShowDialog() == DialogResult.OK)
 					{
-						LoadData();
+						await LoadData();
 					}
 				}
 				else if (dataGridViewFixedAssets.SelectedRows.Count > 1)
@@ -106,7 +110,7 @@ namespace IES.FixedAssets.Host.Forms
 					await _fixedAssetService.Delete(id);
 				}
 
-				LoadData();
+				await LoadData();
 			}
 			catch (Exception exc)
 			{
@@ -119,9 +123,9 @@ namespace IES.FixedAssets.Host.Forms
 			Close();
 		}
 
-		private void FixedAssetsForm_Load(object sender, EventArgs e)
+		private async void FixedAssetsForm_Load(object sender, EventArgs e)
 		{
-			LoadData();
+			await LoadData();
 		}
 	}
 }

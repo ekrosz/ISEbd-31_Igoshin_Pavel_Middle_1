@@ -5,12 +5,10 @@ namespace IES.FixedAssets.Common.Enums
 {
 	public enum OperationType
 	{
-		[Description("Первый тип")]
-		[EnumMember(Value = "FirstType")]
-		FirstType,
+		[Description("Выбытие")]
+		Disposal,
 
-		[Description("Второй тип")]
-		[EnumMember(Value = "SecondType")]
-		SecondType
+		[Description("Поступление")]
+		Receipt
 	}
 }

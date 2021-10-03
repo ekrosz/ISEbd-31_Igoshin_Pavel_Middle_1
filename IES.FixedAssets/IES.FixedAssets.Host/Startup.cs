@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IES.FixedAssets.Common.Helpers.Tools;
 using IES.FixedAssets.Core.Models.Dto;
 using IES.FixedAssets.Core.Models.Requests.EntryJournalRequests;
 using IES.FixedAssets.Core.Models.Requests.FixedAssetRequest;
@@ -66,7 +67,8 @@ namespace IES.FixedAssets.Host
 				cfg.CreateMap<EntryJournalModel, EntryJournalDto>();
 				cfg.CreateMap<FixedAssetModel, FixedAssetDto>();
 				cfg.CreateMap<ProviderModel, ProviderDto>();
-				cfg.CreateMap<ReceiptModel, ReceiptDto>();
+				cfg.CreateMap<ReceiptModel, ReceiptDto>()
+				.ForMember(dto => dto.OperationType, from => from.MapFrom(entity => entity.OperationType.GetDescription()));
 				cfg.CreateMap<ReceiptTableModel, ReceiptTableDto>();
 
 				cfg.CreateMap<CreateEntryJournalRequest, EntryJournalModel>();

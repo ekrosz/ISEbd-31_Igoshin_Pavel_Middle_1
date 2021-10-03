@@ -1,6 +1,7 @@
 ﻿using IES.FixedAssets.Core.Models.Requests.FixedAssetRequest;
 using IES.FixedAssets.Core.Services.Contracts;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
@@ -22,7 +23,7 @@ namespace IES.FixedAssets.Host.Forms
 			_fixedAssetService = fixedAssetService;
 		}
 
-		private async void LoadData()
+		private async Task LoadData()
 		{
 			var data = await _fixedAssetService.Get(Id);
 
@@ -30,9 +31,9 @@ namespace IES.FixedAssets.Host.Forms
 			textBoxBalance.Text = data.BalancePrice.ToString();
 		}
 
-		private void FixedAssetUpdateForm_Load(object sender, EventArgs e)
+		private async void FixedAssetUpdateForm_Load(object sender, EventArgs e)
 		{
-			LoadData();
+			await LoadData();
 		}
 
 		private void buttonCancel_Click(object sender, EventArgs e)

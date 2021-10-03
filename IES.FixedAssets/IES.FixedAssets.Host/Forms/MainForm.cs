@@ -18,13 +18,9 @@ namespace IES.FixedAssets.Host.Forms
 		[Dependency]
 		public new IUnityContainer Container { get; set; }
 
-		private readonly IAccountChartService _accountChartService;
-
-		public MainForm(IAccountChartService accountChartService)
+		public MainForm()
 		{
 			InitializeComponent();
-
-			_accountChartService = accountChartService;
 		}
 
 		private void планСчетовToolStripMenuItem_Click(object sender, EventArgs e)
@@ -37,6 +33,20 @@ namespace IES.FixedAssets.Host.Forms
 		private void оСToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			var form = Container.Resolve<FixedAssetsForm>();
+
+			form.ShowDialog();
+		}
+
+		private void поставщикиToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<ProvidersForm>();
+
+			form.ShowDialog();
+		}
+
+		private void журналОперацийToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<ReceiptsForm>();
 
 			form.ShowDialog();
 		}

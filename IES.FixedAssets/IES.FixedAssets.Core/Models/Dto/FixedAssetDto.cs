@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace IES.FixedAssets.Core.Models.Dto
 {
@@ -6,8 +7,10 @@ namespace IES.FixedAssets.Core.Models.Dto
 	{
 		public Guid Id { get; set; }
 
+		[DisplayName("Наименование")]
 		public string Name { get; set; }
 
+		[DisplayName("Балансовая стоимость")]
 		public double BalancePrice { get; set; }
 	}
 }

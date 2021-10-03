@@ -77,15 +77,16 @@ namespace IES.FixedAssets.Host.Forms
 			// оСToolStripMenuItem
 			// 
 			this.оСToolStripMenuItem.Name = "оСToolStripMenuItem";
-			this.оСToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.оСToolStripMenuItem.Size = new System.Drawing.Size(216, 34);
 			this.оСToolStripMenuItem.Text = "ОС";
 			this.оСToolStripMenuItem.Click += new System.EventHandler(this.оСToolStripMenuItem_Click);
 			// 
 			// поставщикиToolStripMenuItem
 			// 
 			this.поставщикиToolStripMenuItem.Name = "поставщикиToolStripMenuItem";
-			this.поставщикиToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.поставщикиToolStripMenuItem.Size = new System.Drawing.Size(216, 34);
 			this.поставщикиToolStripMenuItem.Text = "Поставщики";
+			this.поставщикиToolStripMenuItem.Click += new System.EventHandler(this.поставщикиToolStripMenuItem_Click);
 			// 
 			// журналыToolStripMenuItem
 			// 
@@ -99,13 +100,14 @@ namespace IES.FixedAssets.Host.Forms
 			// журналОперацийToolStripMenuItem
 			// 
 			this.журналОперацийToolStripMenuItem.Name = "журналОперацийToolStripMenuItem";
-			this.журналОперацийToolStripMenuItem.Size = new System.Drawing.Size(266, 34);
+			this.журналОперацийToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
 			this.журналОперацийToolStripMenuItem.Text = "Журнал операций";
+			this.журналОперацийToolStripMenuItem.Click += new System.EventHandler(this.журналОперацийToolStripMenuItem_Click);
 			// 
 			// журналПроводокToolStripMenuItem
 			// 
 			this.журналПроводокToolStripMenuItem.Name = "журналПроводокToolStripMenuItem";
-			this.журналПроводокToolStripMenuItem.Size = new System.Drawing.Size(266, 34);
+			this.журналПроводокToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
 			this.журналПроводокToolStripMenuItem.Text = "Журнал проводок";
 			// 
 			// отчетыToolStripMenuItem

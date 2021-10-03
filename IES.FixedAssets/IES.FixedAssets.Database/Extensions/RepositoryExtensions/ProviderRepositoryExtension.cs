@@ -25,7 +25,7 @@ namespace IES.FixedAssets.Database.Extensions.RepositoryExtensions
 			var entity = entities
 				.FirstOrDefault(e => string.Equals(e.Name, name, StringComparison.OrdinalIgnoreCase));
 
-			if (entity == null)
+			if (entity != null)
 				throw new Exception("Поставщик с данным именем уже существует!");
 		}
 

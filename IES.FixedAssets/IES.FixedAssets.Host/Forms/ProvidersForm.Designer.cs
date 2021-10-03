@@ -1,7 +1,7 @@
 ﻿
 namespace IES.FixedAssets.Host.Forms
 {
-	partial class FixedAssetsForm
+	partial class ProvidersForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,7 +29,6 @@ namespace IES.FixedAssets.Host.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.dataGridViewFixedAssets = new System.Windows.Forms.DataGridView();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.buttonDelete = new System.Windows.Forms.Button();
@@ -37,23 +36,10 @@ namespace IES.FixedAssets.Host.Forms
 			this.buttonAdd = new System.Windows.Forms.Button();
 			this.labelName = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
-			this.textBoxBalance = new System.Windows.Forms.TextBox();
-			this.labelBalance = new System.Windows.Forms.Label();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridViewFixedAssets)).BeginInit();
+			this.dataGridViewProviders = new System.Windows.Forms.DataGridView();
 			this.groupBox1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridViewProviders)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// dataGridViewFixedAssets
-			// 
-			this.dataGridViewFixedAssets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.dataGridViewFixedAssets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridViewFixedAssets.Location = new System.Drawing.Point(12, 12);
-			this.dataGridViewFixedAssets.Name = "dataGridViewFixedAssets";
-			this.dataGridViewFixedAssets.RowHeadersWidth = 62;
-			this.dataGridViewFixedAssets.RowTemplate.Height = 28;
-			this.dataGridViewFixedAssets.Size = new System.Drawing.Size(855, 668);
-			this.dataGridViewFixedAssets.TabIndex = 3;
 			// 
 			// groupBox1
 			// 
@@ -63,14 +49,12 @@ namespace IES.FixedAssets.Host.Forms
 			this.groupBox1.Controls.Add(this.buttonDelete);
 			this.groupBox1.Controls.Add(this.buttonUpdate);
 			this.groupBox1.Controls.Add(this.buttonAdd);
-			this.groupBox1.Controls.Add(this.labelBalance);
 			this.groupBox1.Controls.Add(this.labelName);
-			this.groupBox1.Controls.Add(this.textBoxBalance);
 			this.groupBox1.Controls.Add(this.textBoxName);
 			this.groupBox1.Location = new System.Drawing.Point(873, 12);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(315, 668);
-			this.groupBox1.TabIndex = 4;
+			this.groupBox1.TabIndex = 6;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Добавление / редактирование";
 			// 
@@ -86,7 +70,7 @@ namespace IES.FixedAssets.Host.Forms
 			// 
 			// buttonDelete
 			// 
-			this.buttonDelete.Location = new System.Drawing.Point(6, 353);
+			this.buttonDelete.Location = new System.Drawing.Point(6, 255);
 			this.buttonDelete.Name = "buttonDelete";
 			this.buttonDelete.Size = new System.Drawing.Size(303, 35);
 			this.buttonDelete.TabIndex = 6;
@@ -96,7 +80,7 @@ namespace IES.FixedAssets.Host.Forms
 			// 
 			// buttonUpdate
 			// 
-			this.buttonUpdate.Location = new System.Drawing.Point(6, 311);
+			this.buttonUpdate.Location = new System.Drawing.Point(6, 213);
 			this.buttonUpdate.Name = "buttonUpdate";
 			this.buttonUpdate.Size = new System.Drawing.Size(303, 35);
 			this.buttonUpdate.TabIndex = 5;
@@ -106,7 +90,7 @@ namespace IES.FixedAssets.Host.Forms
 			// 
 			// buttonAdd
 			// 
-			this.buttonAdd.Location = new System.Drawing.Point(166, 180);
+			this.buttonAdd.Location = new System.Drawing.Point(166, 115);
 			this.buttonAdd.Name = "buttonAdd";
 			this.buttonAdd.Size = new System.Drawing.Size(143, 43);
 			this.buttonAdd.TabIndex = 4;
@@ -130,52 +114,44 @@ namespace IES.FixedAssets.Host.Forms
 			this.textBoxName.Size = new System.Drawing.Size(303, 26);
 			this.textBoxName.TabIndex = 0;
 			// 
-			// textBoxBalance
+			// dataGridViewProviders
 			// 
-			this.textBoxBalance.Location = new System.Drawing.Point(6, 135);
-			this.textBoxBalance.Name = "textBoxBalance";
-			this.textBoxBalance.Size = new System.Drawing.Size(303, 26);
-			this.textBoxBalance.TabIndex = 1;
-			this.textBoxBalance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxBalance_KeyPress);
+			this.dataGridViewProviders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.dataGridViewProviders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridViewProviders.Location = new System.Drawing.Point(12, 12);
+			this.dataGridViewProviders.Name = "dataGridViewProviders";
+			this.dataGridViewProviders.RowHeadersWidth = 62;
+			this.dataGridViewProviders.RowTemplate.Height = 28;
+			this.dataGridViewProviders.Size = new System.Drawing.Size(855, 668);
+			this.dataGridViewProviders.TabIndex = 5;
 			// 
-			// labelBalance
-			// 
-			this.labelBalance.AutoSize = true;
-			this.labelBalance.Location = new System.Drawing.Point(6, 112);
-			this.labelBalance.Name = "labelBalance";
-			this.labelBalance.Size = new System.Drawing.Size(186, 20);
-			this.labelBalance.TabIndex = 3;
-			this.labelBalance.Text = "Балансовая стоимость";
-			// 
-			// FixedAssetsForm
+			// ProvidersForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1200, 692);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.dataGridViewFixedAssets);
-			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.Name = "FixedAssetsForm";
-			this.Text = "Основные средства";
-			this.Load += new System.EventHandler(this.FixedAssetsForm_Load);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridViewFixedAssets)).EndInit();
+			this.Controls.Add(this.dataGridViewProviders);
+			this.Name = "ProvidersForm";
+			this.Text = "ProvidersForm";
+			this.Load += new System.EventHandler(this.ProvidersForm_Load);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridViewProviders)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.DataGridView dataGridViewFixedAssets;
 		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.Button buttonAdd;
-		private System.Windows.Forms.Label labelName;
-		private System.Windows.Forms.TextBox textBoxName;
 		private System.Windows.Forms.Button buttonClose;
 		private System.Windows.Forms.Button buttonDelete;
 		private System.Windows.Forms.Button buttonUpdate;
-		private System.Windows.Forms.Label labelBalance;
-		private System.Windows.Forms.TextBox textBoxBalance;
+		private System.Windows.Forms.Button buttonAdd;
+		private System.Windows.Forms.Label labelName;
+		private System.Windows.Forms.TextBox textBoxName;
+		private System.Windows.Forms.DataGridView dataGridViewProviders;
 	}
 }
