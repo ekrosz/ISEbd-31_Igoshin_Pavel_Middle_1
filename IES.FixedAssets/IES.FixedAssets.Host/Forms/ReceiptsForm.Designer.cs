@@ -30,6 +30,12 @@ namespace IES.FixedAssets.Host.Forms
 		private void InitializeComponent()
 		{
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+			this.labelDate = new System.Windows.Forms.Label();
+			this.textBoxSum = new System.Windows.Forms.TextBox();
+			this.labelSum = new System.Windows.Forms.Label();
+			this.comboBoxOperationType = new System.Windows.Forms.ComboBox();
+			this.comboBoxProvider = new System.Windows.Forms.ComboBox();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.buttonDelete = new System.Windows.Forms.Button();
 			this.buttonUpdate = new System.Windows.Forms.Button();
@@ -37,14 +43,12 @@ namespace IES.FixedAssets.Host.Forms
 			this.labelOperationType = new System.Windows.Forms.Label();
 			this.labelProvider = new System.Windows.Forms.Label();
 			this.dataGridViewReceipts = new System.Windows.Forms.DataGridView();
-			this.comboBoxProvider = new System.Windows.Forms.ComboBox();
-			this.comboBoxOperationType = new System.Windows.Forms.ComboBox();
-			this.labelSum = new System.Windows.Forms.Label();
-			this.textBoxSum = new System.Windows.Forms.TextBox();
-			this.labelDate = new System.Windows.Forms.Label();
-			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+			this.labelReceipts = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewReceipts)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -65,10 +69,59 @@ namespace IES.FixedAssets.Host.Forms
 			this.groupBox1.Controls.Add(this.labelProvider);
 			this.groupBox1.Location = new System.Drawing.Point(873, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(315, 668);
+			this.groupBox1.Size = new System.Drawing.Size(315, 940);
 			this.groupBox1.TabIndex = 6;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Добавление / редактирование";
+			// 
+			// dateTimePicker1
+			// 
+			this.dateTimePicker1.Location = new System.Drawing.Point(10, 266);
+			this.dateTimePicker1.Name = "dateTimePicker1";
+			this.dateTimePicker1.Size = new System.Drawing.Size(299, 26);
+			this.dateTimePicker1.TabIndex = 13;
+			// 
+			// labelDate
+			// 
+			this.labelDate.AutoSize = true;
+			this.labelDate.Location = new System.Drawing.Point(6, 243);
+			this.labelDate.Name = "labelDate";
+			this.labelDate.Size = new System.Drawing.Size(48, 20);
+			this.labelDate.TabIndex = 12;
+			this.labelDate.Text = "Дата";
+			// 
+			// textBoxSum
+			// 
+			this.textBoxSum.Location = new System.Drawing.Point(10, 201);
+			this.textBoxSum.Name = "textBoxSum";
+			this.textBoxSum.Size = new System.Drawing.Size(299, 26);
+			this.textBoxSum.TabIndex = 11;
+			this.textBoxSum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSum_KeyPress);
+			// 
+			// labelSum
+			// 
+			this.labelSum.AutoSize = true;
+			this.labelSum.Location = new System.Drawing.Point(6, 177);
+			this.labelSum.Name = "labelSum";
+			this.labelSum.Size = new System.Drawing.Size(58, 20);
+			this.labelSum.TabIndex = 10;
+			this.labelSum.Text = "Сумма";
+			// 
+			// comboBoxOperationType
+			// 
+			this.comboBoxOperationType.FormattingEnabled = true;
+			this.comboBoxOperationType.Location = new System.Drawing.Point(10, 135);
+			this.comboBoxOperationType.Name = "comboBoxOperationType";
+			this.comboBoxOperationType.Size = new System.Drawing.Size(299, 28);
+			this.comboBoxOperationType.TabIndex = 9;
+			// 
+			// comboBoxProvider
+			// 
+			this.comboBoxProvider.FormattingEnabled = true;
+			this.comboBoxProvider.Location = new System.Drawing.Point(10, 70);
+			this.comboBoxProvider.Name = "comboBoxProvider";
+			this.comboBoxProvider.Size = new System.Drawing.Size(299, 28);
+			this.comboBoxProvider.TabIndex = 8;
 			// 
 			// buttonClose
 			// 
@@ -82,7 +135,7 @@ namespace IES.FixedAssets.Host.Forms
 			// 
 			// buttonDelete
 			// 
-			this.buttonDelete.Location = new System.Drawing.Point(6, 490);
+			this.buttonDelete.Location = new System.Drawing.Point(6, 452);
 			this.buttonDelete.Name = "buttonDelete";
 			this.buttonDelete.Size = new System.Drawing.Size(303, 35);
 			this.buttonDelete.TabIndex = 6;
@@ -92,7 +145,7 @@ namespace IES.FixedAssets.Host.Forms
 			// 
 			// buttonUpdate
 			// 
-			this.buttonUpdate.Location = new System.Drawing.Point(6, 448);
+			this.buttonUpdate.Location = new System.Drawing.Point(6, 411);
 			this.buttonUpdate.Name = "buttonUpdate";
 			this.buttonUpdate.Size = new System.Drawing.Size(303, 35);
 			this.buttonUpdate.TabIndex = 5;
@@ -133,67 +186,49 @@ namespace IES.FixedAssets.Host.Forms
 			this.dataGridViewReceipts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
 			this.dataGridViewReceipts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridViewReceipts.Location = new System.Drawing.Point(12, 12);
+			this.dataGridViewReceipts.Location = new System.Drawing.Point(16, 59);
 			this.dataGridViewReceipts.Name = "dataGridViewReceipts";
 			this.dataGridViewReceipts.RowHeadersWidth = 62;
 			this.dataGridViewReceipts.RowTemplate.Height = 28;
-			this.dataGridViewReceipts.Size = new System.Drawing.Size(855, 668);
+			this.dataGridViewReceipts.Size = new System.Drawing.Size(851, 440);
 			this.dataGridViewReceipts.TabIndex = 5;
 			// 
-			// comboBoxProvider
+			// labelReceipts
 			// 
-			this.comboBoxProvider.FormattingEnabled = true;
-			this.comboBoxProvider.Location = new System.Drawing.Point(10, 70);
-			this.comboBoxProvider.Name = "comboBoxProvider";
-			this.comboBoxProvider.Size = new System.Drawing.Size(299, 28);
-			this.comboBoxProvider.TabIndex = 8;
+			this.labelReceipts.AutoSize = true;
+			this.labelReceipts.Location = new System.Drawing.Point(12, 13);
+			this.labelReceipts.Name = "labelReceipts";
+			this.labelReceipts.Size = new System.Drawing.Size(109, 20);
+			this.labelReceipts.TabIndex = 7;
+			this.labelReceipts.Text = "Поступления";
 			// 
-			// comboBoxOperationType
+			// label1
 			// 
-			this.comboBoxOperationType.FormattingEnabled = true;
-			this.comboBoxOperationType.Location = new System.Drawing.Point(10, 135);
-			this.comboBoxOperationType.Name = "comboBoxOperationType";
-			this.comboBoxOperationType.Size = new System.Drawing.Size(299, 28);
-			this.comboBoxOperationType.TabIndex = 9;
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(12, 523);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(139, 20);
+			this.label1.TabIndex = 8;
+			this.label1.Text = "Табличная часть";
 			// 
-			// labelSum
+			// dataGridView1
 			// 
-			this.labelSum.AutoSize = true;
-			this.labelSum.Location = new System.Drawing.Point(6, 177);
-			this.labelSum.Name = "labelSum";
-			this.labelSum.Size = new System.Drawing.Size(58, 20);
-			this.labelSum.TabIndex = 10;
-			this.labelSum.Text = "Сумма";
-			// 
-			// textBoxSum
-			// 
-			this.textBoxSum.Location = new System.Drawing.Point(10, 201);
-			this.textBoxSum.Name = "textBoxSum";
-			this.textBoxSum.Size = new System.Drawing.Size(299, 26);
-			this.textBoxSum.TabIndex = 11;
-			this.textBoxSum.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSum_KeyPress);
-			// 
-			// labelDate
-			// 
-			this.labelDate.AutoSize = true;
-			this.labelDate.Location = new System.Drawing.Point(6, 243);
-			this.labelDate.Name = "labelDate";
-			this.labelDate.Size = new System.Drawing.Size(48, 20);
-			this.labelDate.TabIndex = 12;
-			this.labelDate.Text = "Дата";
-			// 
-			// dateTimePicker1
-			// 
-			this.dateTimePicker1.Location = new System.Drawing.Point(10, 266);
-			this.dateTimePicker1.Name = "dateTimePicker1";
-			this.dateTimePicker1.Size = new System.Drawing.Size(299, 26);
-			this.dateTimePicker1.TabIndex = 13;
+			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView1.Location = new System.Drawing.Point(16, 546);
+			this.dataGridView1.Name = "dataGridView1";
+			this.dataGridView1.RowHeadersWidth = 62;
+			this.dataGridView1.RowTemplate.Height = 28;
+			this.dataGridView1.Size = new System.Drawing.Size(851, 406);
+			this.dataGridView1.TabIndex = 9;
 			// 
 			// ReceiptsForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1200, 692);
+			this.ClientSize = new System.Drawing.Size(1200, 964);
+			this.Controls.Add(this.dataGridView1);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.labelReceipts);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.dataGridViewReceipts);
 			this.Name = "ReceiptsForm";
@@ -202,7 +237,9 @@ namespace IES.FixedAssets.Host.Forms
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewReceipts)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -222,5 +259,8 @@ namespace IES.FixedAssets.Host.Forms
 		private System.Windows.Forms.Label labelDate;
 		private System.Windows.Forms.TextBox textBoxSum;
 		private System.Windows.Forms.Label labelSum;
+		private System.Windows.Forms.Label labelReceipts;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.DataGridView dataGridView1;
 	}
 }
