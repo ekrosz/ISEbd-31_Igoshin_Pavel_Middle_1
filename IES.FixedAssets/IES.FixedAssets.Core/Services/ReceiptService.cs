@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using IES.FixedAssets.Common.Enums;
 using IES.FixedAssets.Core.Helpers.Validators;
 using IES.FixedAssets.Core.Models.Dto;
 using IES.FixedAssets.Core.Models.Requests.ReceiptRequests;
@@ -19,12 +20,18 @@ namespace IES.FixedAssets.Core.Services
 
 		private readonly IProviderRepository _providerRepository;
 
+		private readonly ISubdivisionRepository _subdivisionRepository;
+
+		private readonly IResponsibleRepository _responsibleRepository;
+
 		private readonly IMapper _mapper;
 
-		public ReceiptService(IReceiptRepository receiptRepository, IProviderRepository providerRepository, IMapper mapper)
+		public ReceiptService(IReceiptRepository receiptRepository, ISubdivisionRepository subdivisionRepository, IResponsibleRepository responsibleRepository, IProviderRepository providerRepository, IMapper mapper)
 		{
 			_receiptRepository = receiptRepository;
 			_providerRepository = providerRepository;
+			_subdivisionRepository = subdivisionRepository;
+			_responsibleRepository = responsibleRepository;
 			_mapper = mapper;
 		}
 
@@ -50,9 +57,12 @@ namespace IES.FixedAssets.Core.Services
 
 			var dto = _mapper.Map<ReceiptDto>(entity);
 
-			var provider = await _providerRepository.GetProviderOrThrow(dto.ProviderId);
+			if (dto.ProviderId.HasValue)
+			{
+				var provider = await _providerRepository.GetProviderOrThrow(dto.ProviderId.Value);
 
-			dto.ProviderName = provider.Name;
+				dto.ProviderName = provider?.Name;
+			}
 
 			return dto;
 		}
@@ -71,7 +81,50 @@ namespace IES.FixedAssets.Core.Services
 			foreach (var dto in dtos)
 			{
 				dto.ProviderName = providers
-					.SingleOrDefault(p => p.Id == dto.ProviderId)?.Name;
+					?.SingleOrDefault(p => p.Id == dto.ProviderId)?.Name;
+			}
+
+			return dtos;
+		}
+
+		public async Task<IReadOnlyCollection<CommissioningOperationDto>> GetCommissionings()
+		{
+			var entities = await _receiptRepository.GetByOperation(OperationType.Commissioning);
+
+			if (entities == null)
+				return new List<CommissioningOperationDto>();
+
+			var dtos = _mapper.Map<IReadOnlyCollection<CommissioningOperationDto>>(entities);
+
+			var responsibles = await _responsibleRepository.GetAll();
+			var subdivisions = await _subdivisionRepository.GetAll();
+
+			foreach (var dto in dtos)
+			{
+				dto.ResponsibleName = responsibles
+					?.SingleOrDefault(p => p.Id == dto.ResponsibleId)?.Fio;
+				dto.SubdivisionName = subdivisions
+					?.SingleOrDefault(p => p.Id == dto.SubdivisionId)?.Name;
+			}
+
+			return dtos;
+		}
+
+		public async Task<IReadOnlyCollection<ReceiptOperationDto>> GetReceipts()
+		{
+			var entities = await _receiptRepository.GetByOperation(OperationType.Receipt);
+
+			if (entities == null)
+				return new List<ReceiptOperationDto>();
+
+			var dtos = _mapper.Map<IReadOnlyCollection<ReceiptOperationDto>>(entities);
+
+			var providers = await _providerRepository.GetAll();
+
+			foreach (var dto in dtos)
+			{
+				dto.ProviderName = providers
+					?.SingleOrDefault(p => p.Id == dto.ProviderId)?.Name;
 			}
 
 			return dtos;

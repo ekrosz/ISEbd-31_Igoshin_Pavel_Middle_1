@@ -11,6 +11,8 @@ namespace IES.FixedAssets.Database.Repositories.Contracts
 
 		Task<EntryJournalModel> Get(Guid id);
 
+		Task<EntryJournalModel> GetEntryByReceiptTable(Guid receiptTableId);
+
 		Task Create(EntryJournalModel entity);
 
 		Task Update(EntryJournalModel entity);

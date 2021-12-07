@@ -36,14 +36,8 @@ namespace IES.FixedAssets.Database.Extensions.RepositoryExtensions
 			}
 		}
 
-		public async static Task<FixedAssetModel> GetFixedAssetOrThrow(this IFixedAssetRepository fixedAssetRepository, Guid fixedAssetId)
-		{
-			var entity = await fixedAssetRepository.GetById(fixedAssetId);
-
-			if (entity == null)
-				throw new Exception("Данное ОС не найдено!");
-
-			return entity;
-		}
+		public async static Task<FixedAssetModel> GetFixedAssetOrThrow(this IFixedAssetRepository fixedAssetRepository, Guid fixedAssetId) 
+			=> await fixedAssetRepository.GetById(fixedAssetId)
+				?? throw new Exception("Данное ОС не найдено!");
 	}
 }

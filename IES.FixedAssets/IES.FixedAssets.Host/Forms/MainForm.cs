@@ -50,5 +50,47 @@ namespace IES.FixedAssets.Host.Forms
 
 			form.ShowDialog();
 		}
+
+		private void журналПринятияКУчетуToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<AcceptancesForm>();
+
+			form.ShowDialog();
+		}
+
+		private void мОЛToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<ResponsiblesForm>();
+
+			form.ShowDialog();
+		}
+
+		private void подразделенияToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<SubdivisionsForm>();
+
+			form.ShowDialog();
+		}
+
+		private void журналПроводокToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<EntryJournalsForm>();
+
+			form.ShowDialog();
+		}
+
+		private void ведомостьНаличияОСToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<FirstReportForm>();
+
+			form.ShowDialog();
+		}
+
+		private void списокОСЗакрепленныхЗаМОЛToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var form = Container.Resolve<SecondReportForm>();
+
+			form.ShowDialog();
+		}
 	}
 }

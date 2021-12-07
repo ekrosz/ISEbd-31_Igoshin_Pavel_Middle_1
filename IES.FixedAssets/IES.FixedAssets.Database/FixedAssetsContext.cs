@@ -21,6 +21,10 @@ namespace IES.FixedAssets.Database
 
 		public DbSet<CreditAccountChartModel> CreditAccountCharts { get; set; }
 
+		public DbSet<SubdivisionModel> Subdivisions { get; set; }
+
+		public DbSet<ResponsibleModel> Responsibles { get; set; }
+
 		public DbSet<EntryJournalModel> EntryJournals { get; set; }
 
 		public DbSet<FixedAssetModel> FixedAssets { get; set; }
@@ -115,6 +119,37 @@ namespace IES.FixedAssets.Database
 				.OnDelete(DeleteBehavior.Cascade);
 			});
 
+			builder.Entity<SubdivisionModel>(e =>
+			{
+				e.HasKey(p => p.Id);
+
+				e.HasIndex(p => p.Name)
+				.IsUnique();
+
+				e.Property(p => p.Name)
+				.HasMaxLength(100)
+				.IsRequired();
+
+				e.HasMany(p => p.Receipts)
+				.WithOne(p => p.Subdivision)
+				.HasForeignKey(p => p.SubdivisionId)
+				.OnDelete(DeleteBehavior.Cascade);
+			});
+
+			builder.Entity<ResponsibleModel>(e =>
+			{
+				e.HasKey(p => p.Id);
+
+				e.Property(p => p.Fio)
+				.HasMaxLength(150)
+				.IsRequired();
+
+				e.HasMany(p => p.Receipts)
+				.WithOne(p => p.Responsible)
+				.HasForeignKey(p => p.ResponsibleId)
+				.OnDelete(DeleteBehavior.Cascade);
+			});
+
 			builder.Entity<EntryJournalModel>(e =>
 			{
 				e.HasKey(p => p.Id);
@@ -122,8 +157,6 @@ namespace IES.FixedAssets.Database
 				e.HasIndex(p => p.DebitAccountId);
 				
 				e.HasIndex(p => p.CreditAccountId);
-
-				e.HasIndex(p => p.ReceiptTableId);
 
 				e.Property(p => p.CreditFirstSubconto)
 				.HasMaxLength(80);
@@ -194,7 +227,18 @@ namespace IES.FixedAssets.Database
 			{
 				e.HasKey(p => p.Id);
 
-				e.HasIndex(p => p.ProviderId);
+				e.Property(p => p.ProviderId)
+				.IsRequired(false);
+
+				e.Property(p => p.ResponsibleId)
+				.IsRequired(false);
+
+				e.Property(p => p.SubdivisionId)
+				.IsRequired(false);
+
+				e.Property(p => p.OperationNumber)
+				.ValueGeneratedOnAdd()
+				.IsRequired();
 
 				e.Property(p => p.Sum)
 				.IsRequired();
@@ -206,6 +250,10 @@ namespace IES.FixedAssets.Database
 				.HasConversion<string>()
 				.HasMaxLength(100)
 				.IsRequired();
+
+				e.Property(p => p.Source)
+				.HasConversion<string>()
+				.HasMaxLength(100);
 
 				e.HasMany(p => p.ReceiptTables)
 				.WithOne(p => p.Receipt)

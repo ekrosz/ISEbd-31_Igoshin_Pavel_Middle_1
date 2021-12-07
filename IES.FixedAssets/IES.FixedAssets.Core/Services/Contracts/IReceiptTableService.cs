@@ -10,6 +10,8 @@ namespace IES.FixedAssets.Core.Services.Contracts
 	{
 		Task<IReadOnlyCollection<ReceiptTableDto>> GetAll();
 
+		Task<IReadOnlyCollection<ReceiptTableDto>> GetReceiptTableByReceipt(Guid receiptId);
+
 		Task<ReceiptTableDto> Get(Guid id);
 
 		Task Create(CreateReceiptTableRequest args);

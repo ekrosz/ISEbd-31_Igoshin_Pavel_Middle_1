@@ -6,6 +6,8 @@ using IES.FixedAssets.Core.Models.Requests.FixedAssetRequest;
 using IES.FixedAssets.Core.Models.Requests.ProviderRequests;
 using IES.FixedAssets.Core.Models.Requests.ReceiptRequests;
 using IES.FixedAssets.Core.Models.Requests.ReceiptTableRequests;
+using IES.FixedAssets.Core.Models.Requests.ResponsibleRequests;
+using IES.FixedAssets.Core.Models.Requests.SubdivisionRequests;
 using IES.FixedAssets.Core.Services;
 using IES.FixedAssets.Core.Services.Contracts;
 using IES.FixedAssets.Database;
@@ -46,6 +48,8 @@ namespace IES.FixedAssets.Host
 			container.RegisterType<IProviderRepository, ProviderRepository>(new HierarchicalLifetimeManager());
 			container.RegisterType<IReceiptRepository, ReceiptRepository>(new HierarchicalLifetimeManager());
 			container.RegisterType<IReceiptTableRepository, ReceiptTableRepository>(new HierarchicalLifetimeManager());
+			container.RegisterType<ISubdivisionRepository, SubdivisionRepository>(new HierarchicalLifetimeManager());
+			container.RegisterType<IResponsibleRepository, ResponsibleRepository>(new HierarchicalLifetimeManager());
 		}
 
 		private static void AddServices(IUnityContainer container)
@@ -56,6 +60,9 @@ namespace IES.FixedAssets.Host
 			container.RegisterType<IProviderService, ProviderService>(new HierarchicalLifetimeManager());
 			container.RegisterType<IReceiptService, ReceiptService>(new HierarchicalLifetimeManager());
 			container.RegisterType<IReceiptTableService, ReceiptTableService>(new HierarchicalLifetimeManager());
+			container.RegisterType<ISubdivisionService, SubdivisionService>(new HierarchicalLifetimeManager());
+			container.RegisterType<IResponsibleService, ResponsibleService>(new HierarchicalLifetimeManager());
+			container.RegisterType<IReportService, ReportService>(new HierarchicalLifetimeManager());
 		}
 
 		private static void AddMappings(IUnityContainer container)
@@ -68,20 +75,42 @@ namespace IES.FixedAssets.Host
 				cfg.CreateMap<FixedAssetModel, FixedAssetDto>();
 				cfg.CreateMap<ProviderModel, ProviderDto>();
 				cfg.CreateMap<ReceiptModel, ReceiptDto>()
+				.ForMember(dto => dto.OperationType, from => from.MapFrom(entity => entity.OperationType.GetDescription()))
+				.ForMember(dto => dto.Source, from =>
+				{
+					from.PreCondition(entity => entity.Source.HasValue);
+					from.MapFrom(entity => entity.Source.Value.GetDescription());
+				});
+				cfg.CreateMap<ReceiptModel, ReceiptOperationDto>()
+				.ForMember(dto => dto.OperationType, from => from.MapFrom(entity => entity.OperationType.GetDescription()))
+				.ForMember(dto => dto.Source,
+				from =>
+				{
+					from.PreCondition(entity => entity.Source.HasValue);
+					from.MapFrom(entity => entity.Source.Value.GetDescription());
+				});
+				cfg.CreateMap<ReceiptModel, CommissioningOperationDto>()
 				.ForMember(dto => dto.OperationType, from => from.MapFrom(entity => entity.OperationType.GetDescription()));
 				cfg.CreateMap<ReceiptTableModel, ReceiptTableDto>();
+				cfg.CreateMap<ResponsibleModel, ResponsibleDto>();
+				cfg.CreateMap<SubdivisionModel, SubdivisionDto>();
 
 				cfg.CreateMap<CreateEntryJournalRequest, EntryJournalModel>();
 				cfg.CreateMap<CreateFixedAssetRequest, FixedAssetModel>();
 				cfg.CreateMap<CreateProviderRequest, ProviderModel>();
 				cfg.CreateMap<CreateReceiptRequest, ReceiptModel>();
 				cfg.CreateMap<CreateReceiptTableRequest, ReceiptTableModel>();
+				cfg.CreateMap<CreateResponsibleRequest, ResponsibleModel>();
+				cfg.CreateMap<CreateSubdivisionRequest, SubdivisionModel>();
 
 				cfg.CreateMap<UpdateEntryJournalRequest, EntryJournalModel>();
 				cfg.CreateMap<UpdateFixedAssetRequest, FixedAssetModel>();
 				cfg.CreateMap<UpdateProviderRequest, ProviderModel>();
-				cfg.CreateMap<UpdateReceiptRequest, ReceiptModel>();
+				cfg.CreateMap<UpdateReceiptRequest, ReceiptModel>()
+					.ForMember(model => model.Sum, from => from.Ignore());
 				cfg.CreateMap<UpdateReceiptTableRequest, ReceiptTableModel>();
+				cfg.CreateMap<UpdateResponsibleRequest, ResponsibleModel>();
+				cfg.CreateMap<UpdateSubdivisionRequest, SubdivisionModel>();
 			});
 
 			var mapper = config.CreateMapper();

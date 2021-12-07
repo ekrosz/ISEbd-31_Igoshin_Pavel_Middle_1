@@ -9,14 +9,8 @@ namespace IES.FixedAssets.Database.Extensions.RepositoryExtensions
 	public static class ProviderRepositoryExtension
 	{
 		public static async Task<ProviderModel> GetProviderOrThrow(this IProviderRepository provaderRepository, Guid providerId)
-		{
-			var entity = await provaderRepository.Get(providerId);
-
-			if (entity == null)
-				throw new Exception("Данный поставщик не найден!");
-
-			return entity;
-		}
+			=> await provaderRepository.Get(providerId)
+				?? throw new Exception("Данный поставщик не найден!");
 
 		public static async Task IsUniqueNameOrThrow(this IProviderRepository provaderRepository, string name)
 		{

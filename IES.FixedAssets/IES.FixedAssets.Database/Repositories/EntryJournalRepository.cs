@@ -45,6 +45,13 @@ namespace IES.FixedAssets.Database.Repositories
 				.ToArrayAsync();
 		}
 
+		public Task<EntryJournalModel> GetEntryByReceiptTable(Guid receiptTableId)
+		{
+			return _context.EntryJournals
+				.AsNoTracking()
+				.FirstOrDefaultAsync(p => p.ReceiptTableId == receiptTableId);
+		}
+
 		public async Task Update(EntryJournalModel entity)
 		{
 			_context.EntryJournals.Update(entity);

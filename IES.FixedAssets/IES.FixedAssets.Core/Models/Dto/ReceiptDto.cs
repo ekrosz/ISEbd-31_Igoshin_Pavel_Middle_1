@@ -7,7 +7,14 @@ namespace IES.FixedAssets.Core.Models.Dto
 	{
 		public Guid Id { get; set; }
 
-		public Guid ProviderId { get; set; }
+		public Guid? ProviderId { get; set; }
+
+		public Guid? SubdivisionId { get; set; }
+
+		public Guid? ResponsibleId { get; set; }
+
+		[DisplayName("Номер")]
+		public int OperationNumber { get; set; }
 
 		[DisplayName("Поставщик")]
 		public string ProviderName { get; set; }
@@ -20,5 +27,8 @@ namespace IES.FixedAssets.Core.Models.Dto
 
 		[DisplayName("Тип")]
 		public string OperationType { get; set; }
+
+		[DisplayName("Источник")]
+		public string Source { get; set; }
 	}
 }

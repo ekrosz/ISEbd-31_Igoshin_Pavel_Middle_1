@@ -11,11 +11,11 @@
 
   <ItemGroup>
     <Folder Include="Helpers\Extensions\" />
-    <Folder Include="Mappings\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="TemplateEngine.Docx" Version="1.1.5" />
   </ItemGroup>
 
 </Project>

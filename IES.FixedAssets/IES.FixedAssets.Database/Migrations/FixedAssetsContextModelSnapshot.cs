@@ -221,16 +221,31 @@ namespace IES.FixedAssets.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("OperationNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("OperationType")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<Guid>("ProviderId")
+                    b.Property<Guid?>("ProviderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("ReceiptDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ResponsibleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Source")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<Guid?>("SubdivisionId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Sum")
                         .HasColumnType("float");
@@ -238,6 +253,10 @@ namespace IES.FixedAssets.Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProviderId");
+
+                    b.HasIndex("ResponsibleId");
+
+                    b.HasIndex("SubdivisionId");
 
                     b.ToTable("Receipts");
                 });
@@ -269,6 +288,41 @@ namespace IES.FixedAssets.Database.Migrations
                     b.ToTable("ReceiptTables");
                 });
 
+            modelBuilder.Entity("IES.FixedAssets.Database.Models.ResponsibleModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Fio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Responsibles");
+                });
+
+            modelBuilder.Entity("IES.FixedAssets.Database.Models.SubdivisionModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Subdivisions");
+                });
+
             modelBuilder.Entity("IES.FixedAssets.Database.Models.EntryJournalModel", b =>
                 {
                     b.HasOne("IES.FixedAssets.Database.Models.CreditAccountChartModel", "CreditAccountChart")
@@ -295,8 +349,17 @@ namespace IES.FixedAssets.Database.Migrations
                     b.HasOne("IES.FixedAssets.Database.Models.ProviderModel", "Provider")
                         .WithMany("Receipts")
                         .HasForeignKey("ProviderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("IES.FixedAssets.Database.Models.ResponsibleModel", "Responsible")
+                        .WithMany("Receipts")
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("IES.FixedAssets.Database.Models.SubdivisionModel", "Subdivision")
+                        .WithMany("Receipts")
+                        .HasForeignKey("SubdivisionId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("IES.FixedAssets.Database.Models.ReceiptTableModel", b =>

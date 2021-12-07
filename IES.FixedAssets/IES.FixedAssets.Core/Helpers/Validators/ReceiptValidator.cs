@@ -8,17 +8,30 @@ namespace IES.FixedAssets.Core.Helpers.Validators
 	{
 		public static void Validate(this CreateReceiptRequest args)
 		{
-			args.ProviderId = Guid.TryParse(args.ProviderId, out var providerId)
-				? providerId.ToString()
-				: throw new Exception("Выбран неверный формат поставщика!");
+			if (!string.IsNullOrWhiteSpace(args.ProviderId))
+			{
+				args.ProviderId = Guid.TryParse(args.ProviderId, out var providerId)
+					? providerId.ToString()
+					: throw new Exception("Выбран неверный формат поставщика!");
+			}
+
+			if (!string.IsNullOrWhiteSpace(args.ResponsibleId))
+			{
+				args.ResponsibleId = Guid.TryParse(args.ResponsibleId, out var responsibleId)
+					? responsibleId.ToString()
+					: throw new Exception("Выбран неверный формат МОЛ!");
+			}
+
+			if (!string.IsNullOrWhiteSpace(args.SubdivisionId))
+			{
+				args.SubdivisionId = Guid.TryParse(args.SubdivisionId, out var subdivisionId)
+					? subdivisionId.ToString()
+					: throw new Exception("Выбран неверный формат подразделения!");
+			}
 
 			args.ReceiptDate = DateTime.TryParse(args.ReceiptDate, out var receiptDate)
 				? receiptDate.ToString()
 				: throw new Exception("Выбран неверный формат даты!");
-
-			args.Sum = double.TryParse(args.Sum, out var sum)
-				? Math.Round(sum, 2).ToString()
-				: throw new Exception("Введен неверный формат суммы!");
 
 			if (Enum.TryParse<OperationType>(args.OperationType, out var operationType))
 			{
@@ -28,8 +41,8 @@ namespace IES.FixedAssets.Core.Helpers.Validators
 			{
 				switch (args.OperationType)
 				{
-					case "Выбытие":
-						args.OperationType = OperationType.Disposal.ToString();
+					case "Ввод в эксплуатацию":
+						args.OperationType = OperationType.Commissioning.ToString();
 						break;
 
 					case "Поступление":
@@ -40,21 +53,61 @@ namespace IES.FixedAssets.Core.Helpers.Validators
 						throw new Exception("Выбран неверный формат типа операции!");
 				}
 			}
+
+			if (!string.IsNullOrEmpty(args.Source))
+			{
+				if (Enum.TryParse<SourceReceipt>(args.Source, out var source))
+				{
+					args.Source = source.ToString();
+				}
+				else
+				{
+					switch (args.Source?.ToLower())
+					{
+						case "создано":
+							args.Source = SourceReceipt.Created.ToString();
+							break;
+
+						case "куплено":
+							args.Source = SourceReceipt.Bought.ToString();
+
+							if (string.IsNullOrWhiteSpace(args.ProviderId))
+								throw new Exception("Укажите поставщика!");
+							break;
+
+						default:
+							throw new Exception("Выбран неверный формат источника поступления!");
+					}
+				}
+			}
 		}
 
 		public static void Validate(this UpdateReceiptRequest args)
 		{
-			args.ProviderId = Guid.TryParse(args.ProviderId, out var providerId)
-				? providerId.ToString()
-				: throw new Exception("Выбран неверный формат поставщика!");
+			if (!string.IsNullOrWhiteSpace(args.ProviderId))
+			{
+				args.ProviderId = Guid.TryParse(args.ProviderId, out var providerId)
+					? providerId.ToString()
+					: throw new Exception("Выбран неверный формат поставщика!");
+			}
+
+			if (!string.IsNullOrWhiteSpace(args.ResponsibleId))
+			{
+				args.ResponsibleId = Guid.TryParse(args.ResponsibleId, out var responsibleId)
+					? responsibleId.ToString()
+					: throw new Exception("Выбран неверный формат МОЛ!");
+			}
+
+			if (!string.IsNullOrWhiteSpace(args.SubdivisionId))
+			{
+				args.SubdivisionId = Guid.TryParse(args.SubdivisionId, out var subdivisionId)
+					? subdivisionId.ToString()
+					: throw new Exception("Выбран неверный формат подразделения!");
+			}
 
 			args.ReceiptDate = DateTime.TryParse(args.ReceiptDate, out var receiptDate)
 				? receiptDate.ToString()
 				: throw new Exception("Выбран неверный формат даты!");
-
-			args.Sum = double.TryParse(args.Sum, out var sum)
-				? Math.Round(sum, 2).ToString()
-				: throw new Exception("Введен неверный формат суммы!");
 
 			if (Enum.TryParse<OperationType>(args.OperationType, out var operationType))
 			{
@@ -64,8 +117,8 @@ namespace IES.FixedAssets.Core.Helpers.Validators
 			{
 				switch (args.OperationType)
 				{
-					case "Выбытие":
-						args.OperationType = OperationType.Disposal.ToString();
+					case "Ввод в эксплуатацию":
+						args.OperationType = OperationType.Commissioning.ToString();
 						break;
 
 					case "Поступление":
@@ -74,6 +127,34 @@ namespace IES.FixedAssets.Core.Helpers.Validators
 
 					default:
 						throw new Exception("Выбран неверный формат типа операции!");
+				}
+			}
+
+			if (!string.IsNullOrWhiteSpace(args.Source))
+			{
+				if (Enum.TryParse<SourceReceipt>(args.Source, out var source))
+				{
+					args.Source = source.ToString();
+				}
+				else
+				{
+					switch (args.Source.ToLower())
+					{
+						case "создано":
+							args.Source = SourceReceipt.Created.ToString();
+							break;
+
+						case "куплено":
+							args.Source = SourceReceipt.Bought.ToString();
+
+							if (string.IsNullOrWhiteSpace(args.ProviderId))
+								throw new Exception("Укажите поставщика!");
+
+							break;
+
+						default:
+							throw new Exception("Выбран неверный формат источника поступления!");
+					}
 				}
 			}
 		}

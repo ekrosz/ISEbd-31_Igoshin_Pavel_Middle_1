@@ -1,4 +1,5 @@
-﻿using IES.FixedAssets.Core.Models.Dto;
+﻿using IES.FixedAssets.Common.Enums;
+using IES.FixedAssets.Core.Models.Dto;
 using IES.FixedAssets.Core.Models.Requests.ReceiptRequests;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,10 @@ namespace IES.FixedAssets.Core.Services.Contracts
 	public interface IReceiptService
 	{
 		Task<IReadOnlyCollection<ReceiptDto>> GetAll();
+
+		Task<IReadOnlyCollection<ReceiptOperationDto>> GetReceipts();
+
+		Task<IReadOnlyCollection<CommissioningOperationDto>> GetCommissionings();
 
 		Task<ReceiptDto> Get(Guid id);
 

@@ -6,6 +6,7 @@ using IES.FixedAssets.Database.Models;
 using IES.FixedAssets.Database.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IES.FixedAssets.Core.Services
@@ -16,10 +17,19 @@ namespace IES.FixedAssets.Core.Services
 
 		private readonly IEntryJournalRepository _entryJournalRepository;
 
-		public EntryJournalService(IMapper mapper, IEntryJournalRepository entryJournalRepository)
+		private readonly IAccountChartRepository _accountChartRepository;
+
+		private readonly IReceiptRepository _receiptRepository;
+
+		private readonly IReceiptTableRepository _receiptTableRepository;
+
+		public EntryJournalService(IMapper mapper, IEntryJournalRepository entryJournalRepository, IAccountChartRepository accountChartRepository, IReceiptRepository receiptRepository, IReceiptTableRepository receiptTableRepository)
 		{
 			_mapper = mapper;
 			_entryJournalRepository = entryJournalRepository;
+			_accountChartRepository = accountChartRepository;
+			_receiptRepository = receiptRepository;
+			_receiptTableRepository = receiptTableRepository;
 		}
 
 		public async Task Create(CreateEntryJournalRequest args)
@@ -33,7 +43,7 @@ namespace IES.FixedAssets.Core.Services
 		{
 			var entity = await _entryJournalRepository.Get(id);
 
-			_entryJournalRepository.Delete(entity);
+			await _entryJournalRepository.Delete(entity);
 		}
 
 		public async Task<EntryJournalDto> Get(Guid id)
@@ -49,7 +59,21 @@ namespace IES.FixedAssets.Core.Services
 		{
 			var entities = await _entryJournalRepository.GetAll();
 
+			var receipts = await _receiptRepository.GetAll();
+			var debits = await _accountChartRepository.GetAllDebitAccounts();
+			var credits = await _accountChartRepository.GetAllCreditAccounts();
+			var receiptTables = await _receiptTableRepository.GetAll();
+
 			var dtos = _mapper.Map<IReadOnlyCollection<EntryJournalModel>, IReadOnlyCollection<EntryJournalDto>>(entities);
+
+			foreach (var dto in dtos)
+			{
+				dto.CreditAccountNumber = credits.FirstOrDefault(p => p.Id == dto.CreditAccountId).AccountNumber;
+				dto.DebitAccountNumber = debits.FirstOrDefault(p => p.Id == dto.DebitAccountId).AccountNumber;
+				var receiptTable = receiptTables.FirstOrDefault(p => p.Id == dto.ReceiptTableId);
+
+				dto.OperationNumber = receipts.FirstOrDefault(p => p.Id == receiptTable.ReceiptId).OperationNumber;
+			}
 
 			return dtos;
 		}
@@ -60,7 +84,7 @@ namespace IES.FixedAssets.Core.Services
 
 			_mapper.Map(args, entity);
 
-			_entryJournalRepository.Update(entity);
+			await _entryJournalRepository.Update(entity);
 		}
 	}
 }

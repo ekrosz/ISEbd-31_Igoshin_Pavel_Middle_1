@@ -8,13 +8,7 @@ namespace IES.FixedAssets.Database.Extensions.RepositoryExtensions
 	public static class ReceiptRepositoryExtension
 	{
 		public static async Task<ReceiptModel> GetReceiptOrThrow(this IReceiptRepository receiptRepository, Guid receiptId)
-		{
-			var entity = await receiptRepository.Get(receiptId);
-
-			if (entity == null)
-				throw new Exception("Данная операция не найдена");
-
-			return entity;
-		}
+			=> await receiptRepository.Get(receiptId) 
+				?? throw new Exception("Данная операция не найдена");
 	}
 }
